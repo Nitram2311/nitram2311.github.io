@@ -1,0 +1,27 @@
+    :root{--bg:#0b1221;--card:#fff;--accent:rgb(0, 83, 14);}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(#071025,#07142a);color:#fff}
+    .container{max-width:1000px;margin:24px auto;padding:16px}
+    header{display:flex;gap:16px;align-items:center;justify-content:space-between}
+    h1{margin:0;font-size:1.6rem}
+    .top-info{display:flex;gap:12px;align-items:center}
+    .panel{background:rgba(255,255,255,0.04);padding:10px;border-radius:10px}
+
+    /* Spielbereich */
+    .game-area{position:relative;height:520px;border-radius:12px;overflow:hidden;margin-top:16px;background-image:radial-gradient(circle at 10% 10%, rgba(255,255,255,0.03), transparent), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><circle cx="100" cy="100" r="2" fill="rgba(255,255,255,0.02)"/></svg>');box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+    .ground{position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(#0a1a12,#08210d);}
+
+    /* Schneeflocken */
+    .snow{position:absolute;inset:0;pointer-events:none}
+    .snow i{position:absolute;top:-10px;font-style:normal;opacity:0.9;}
+
+    /* Geschenke */
+    .present{position:absolute;display:flex;align-items:center;justify-content:center;width:92px;height:92px;border-radius:8px;cursor:pointer;user-select:none;box-shadow:0 6px 14px rgba(0,0,0,0.5);transform-origin:center}
+    .present .label{font-weight:700;color:#fff;font-size:18px}
+
+    /* Controls */
+    .controls{display:flex;gap:8px;align-items:center}
+    button{background:var(--accent);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer}
+    button[disabled]{opacity:0.5}
+
+    /* Small screens */
+    @media (max-width:640px){.present{width:72px;height:72px}.container{padding:8px}.game-area{height:420px}}
