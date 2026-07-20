@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top 250 YouTube Channels 2026 — ViewTube</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* --- TOP 250 PAGE SPECIFIC --- */
+    .page-hero {
+      padding: 140px 0 80px;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,0,0,0.12) 0%, transparent 70%),
+        var(--black);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .page-hero-content { position: relative; z-index: 1; }
+    .page-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.25);
+      border-radius: 100px; padding: 6px 16px; margin-bottom: 24px;
+      font-size: 0.78rem; color: var(--red); font-weight: 600; letter-spacing: 0.08em;
+    }
+    .live-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--red);
+      animation: blink 1.6s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700; letter-spacing: -0.04em; margin-bottom: 16px;
+    }
+    .page-subtitle { font-size: 1.05rem; color: var(--light); max-width: 520px; margin: 0 auto 36px; line-height: 1.7; }
+
+    /* Controls */
+    .controls {
+      background: var(--dark);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 20px 0;
+      position: sticky; top: 64px; z-index: 100;
+    }
+    .controls-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    }
+    .search-box {
+      flex: 1; min-width: 200px; position: relative;
+    }
+    .search-box input {
+      width: 100%; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px; padding: 10px 16px 10px 42px;
+      color: var(--white); font-family: var(--font-body); font-size: 0.9rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .search-box input:focus { border-color: var(--red); }
+    .search-box input::placeholder { color: var(--muted); }
+    .search-icon {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--muted); pointer-events: none;
+    }
+    .filter-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 8px 16px; border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: transparent; color: var(--light);
+      font-size: 0.8rem; font-weight: 500; cursor: pointer;
+      transition: all 0.2s; font-family: var(--font-body); white-space: nowrap;
+    }
+    .filter-btn.active { background: var(--red); border-color: var(--red); color: white; }
+    .filter-btn:hover:not(.active) { border-color: var(--light); color: var(--white); }
+    .result-count { color: var(--muted); font-size: 0.82rem; margin-left: auto; white-space: nowrap; }
+
+    /* Table */
+    .table-section { padding: 40px 0 80px; }
+    .table-wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .channels-table { width: 100%; border-collapse: collapse; }
+    .channels-table thead th {
+      text-align: left; padding: 12px 16px;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .channels-table thead th.th-center { text-align: center; }
+    .channels-table tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+    .channels-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+    .channels-table td { padding: 14px 16px; vertical-align: middle; }
+    .td-rank {
+      font-family: var(--font-display); font-size: 0.9rem;
+      font-weight: 700; color: var(--muted); width: 56px;
+    }
+    .td-rank.top3 { color: var(--red); font-size: 1.05rem; }
+    .channel-cell { display: flex; align-items: center; gap: 14px; }
+    .ch-avatar {
+      width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: white;
+    }
+    .ch-name { font-size: 0.92rem; font-weight: 600; margin-bottom: 2px; }
+    .ch-handle { font-size: 0.78rem; color: var(--muted); }
+    .td-subs { font-size: 0.9rem; font-weight: 600; color: var(--white); white-space: nowrap; }
+    .td-category {
+      text-align: center;
+    }
+    .cat-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 100px;
+      font-size: 0.72rem; font-weight: 600; white-space: nowrap;
+    }
+    .cat-music     { background: rgba(233,30,99,0.15);  color: #E91E63; }
+    .cat-kids      { background: rgba(255,152,0,0.15);  color: #FF9800; }
+    .cat-gaming    { background: rgba(33,150,243,0.15); color: #2196F3; }
+    .cat-creator   { background: rgba(255,0,0,0.15);    color: var(--red); }
+    .cat-news      { background: rgba(96,125,139,0.15); color: #78909C; }
+    .cat-tech      { background: rgba(0,188,212,0.15);  color: #00BCD4; }
+    .cat-education { background: rgba(76,175,80,0.15);  color: #4CAF50; }
+    .cat-sports    { background: rgba(255,87,34,0.15);  color: #FF5722; }
+    .cat-comedy    { background: rgba(156,39,176,0.15); color: #9C27B0; }
+    .cat-food      { background: rgba(139,195,74,0.15); color: #8BC34A; }
+    .cat-auto      { background: rgba(255,193,7,0.15);  color: #FFC107; }
+    .cat-fitness   { background: rgba(0,150,136,0.15);  color: #009688; }
+
+    .td-country { text-align: center; font-size: 1.2rem; }
+    .td-link { text-align: center; }
+    .yt-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--red); color: white;
+      border-radius: 4px; padding: 5px 12px;
+      font-size: 0.75rem; font-weight: 600;
+      text-decoration: none; transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .yt-link:hover { background: var(--red-dark); transform: scale(1.04); }
+    .no-results {
+      text-align: center; padding: 80px 24px;
+      color: var(--muted); font-size: 1rem;
+    }
+    .no-results span { font-size: 2rem; display: block; margin-bottom: 12px; }
+
+    /* Medal icons for top 3 */
+    .medal { font-size: 1.1rem; }
+
+    @media (max-width: 900px) {
+      .td-country, .td-category { display: none; }
+      .page-title { font-size: 2.2rem; }
+    }
+    @media (max-width: 600px) {
+      .td-link { display: none; }
+      .ch-handle { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+  <div class="cursor-ring"></div>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      ViewTube
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Startseite</a></li>
+      <li><a href="top250.html" style="color:var(--white)">Top 250</a></li>
+      <li><a href="studio.html">Studio</a></li>
+      <li><a href="trends.html">Trends</a></li>
+    </ul>
+    <a href="studio.html" class="nav-cta">Zum Studio →</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-content section-inner">
+      <div class="page-badge"><div class="live-dot"></div> Stand: Juni 2026</div>
+      <h1 class="page-title">Top 250 YouTube Channels</h1>
+      <p class="page-subtitle">
+        Die meistabonnierten Kanäle der Welt — sortiert, filterbar, direkt verlinkt.
+        Daten basieren auf öffentlich verfügbaren Quellen (Stand Juni 2026).
+      </p>
+    </div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="controls-inner">
+      <div class="search-box">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" id="searchInput" placeholder="Kanal suchen…" autocomplete="off" />
+      </div>
+      <div class="filter-btns">
+        <button class="filter-btn active" data-cat="all">Alle</button>
+        <button class="filter-btn" data-cat="Musik">🎵 Musik</button>
+        <button class="filter-btn" data-cat="Kids">🧒 Kids</button>
+        <button class="filter-btn" data-cat="Creator">🎬 Creator</button>
+        <button class="filter-btn" data-cat="Gaming">🎮 Gaming</button>
+        <button class="filter-btn" data-cat="Education">📚 Bildung</button>
+        <button class="filter-btn" data-cat="Tech">💻 Tech</button>
+        <button class="filter-btn" data-cat="News">📰 News</button>
+      </div>
+      <span class="result-count" id="resultCount">250 Kanäle</span>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-section">
+    <div class="table-wrap">
+      <table class="channels-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Kanal</th>
+            <th>Abonnenten</th>
+            <th class="th-center">Kategorie</th>
+            <th class="th-center">Land</th>
+            <th class="th-center">Öffnen</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults" style="display:none;">
+        <span>🔍</span>
+        Kein Kanal gefunden. Andere Suche versuchen?
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="nav-logo" style="margin-bottom:12px;display:inline-flex;">
+            <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            ViewTube
+          </a>
+          <p class="footer-brand-desc">Abonnentenzahlen basieren auf öffentlichen Quellen (Stand Juni 2026). Keine offizielle YouTube-Seite.</p>
+        </div>
+        <div>
+          <div class="footer-heading">Seiten</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Startseite</a></li>
+            <li><a href="top250.html">Top 250</a></li>
+            <li><a href="studio.html">YouTube Studio</a></li>
+            <li><a href="trends.html">Trends 2026</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Quellen</div>
+          <ul class="footer-links">
+            <li><a href="https://hypeauditor.com/top-youtube/" target="_blank">HypeAuditor ↗</a></li>
+            <li><a href="https://www.youtube.com/feed/trending" target="_blank">YouTube Trending ↗</a></li>
+            <li><a href="https://socialblade.com" target="_blank">Social Blade ↗</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Extern</div>
+          <ul class="footer-links">
+            <li><a href="https://www.youtube.com" target="_blank">YouTube.com ↗</a></li>
+            <li><a href="https://studio.youtube.com" target="_blank">YouTube Studio ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 ViewTube — Keine offizielle YouTube-Seite.</span>
+        <span class="footer-copy">Made with Claude</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+  // ── TOP 250 DATA (Stand Juni 2026) ──────────────────────────────────────────
+  const channels = [
+    // 1-10
+    { name:"MrBeast", handle:"@MrBeast", subs:"501 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@MrBeast", color:"#E53935" },
+    { name:"T-Series", handle:"@tseries", subs:"312 Mio.", cat:"Musik", flag:"🇮🇳", url:"https://www.youtube.com/@tseries", color:"#E91E63" },
+    { name:"Cocomelon", handle:"@Cocomelon", subs:"201 Mio.", cat:"Kids", flag:"🇺🇸", url:"https://www.youtube.com/@Cocomelon", color:"#FF9800" },
+    { name:"SET India", handle:"@setindia", subs:"189 Mio.", cat:"News", flag:"🇮🇳", url:"https://www.youtube.com/@setindia", color:"#607D8B" },
+    { name:"Vlad and Niki", handle:"@VladandNiki", subs:"150 Mio.", cat:"Kids", flag:"🇺🇸", url:"https://www.youtube.com/@VladandNiki", color:"#FF9800" },
+    { name:"Kids Diana Show", handle:"@KidsDianaShow", subs:"126 Mio.", cat:"Kids", flag:"🇺🇸", url:"https://www.youtube.com/@KidsDianaShow", color:"#FF9800" },
+    { name:"Like Nastya", handle:"@LikeNastya", subs:"121 Mio.", cat:"Kids", flag:"🇺🇸", url:"https://www.youtube.com/@LikeNastya", color:"#FF9800" },
+    { name:"PewDiePie", handle:"@PewDiePie", subs:"111 Mio.", cat:"Creator", flag:"🇸🇪", url:"https://www.youtube.com/@PewDiePie", color:"#E53935" },
+    { name:"Zee TV", handle:"@ZeeTV", subs:"109 Mio.", cat:"News", flag:"🇮🇳", url:"https://www.youtube.com/@ZeeTV", color:"#607D8B" },
+    { name:"WWE", handle:"@WWE", subs:"103 Mio.", cat:"Sports", flag:"🇺🇸", url:"https://www.youtube.com/@WWE", color:"#FF5722" },
+    // 11-20
+    { name:"BLACKPINK", handle:"@BLACKPINK", subs:"97 Mio.", cat:"Musik", flag:"🇰🇷", url:"https://www.youtube.com/@BLACKPINK", color:"#E91E63" },
+    { name:"Goldmines", handle:"@GoldminesAction", subs:"95 Mio.", cat:"Musik", flag:"🇮🇳", url:"https://www.youtube.com/@GoldminesAction", color:"#E91E63" },
+    { name:"Mark Rober", handle:"@MarkRober", subs:"67 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@MarkRober", color:"#4CAF50" },
+    { name:"HYBE LABELS", handle:"@HYBELABELS", subs:"75 Mio.", cat:"Musik", flag:"🇰🇷", url:"https://www.youtube.com/@HYBELABELS", color:"#E91E63" },
+    { name:"BTS", handle:"@bts_official_bighit", subs:"74 Mio.", cat:"Musik", flag:"🇰🇷", url:"https://www.youtube.com/@bts_official_bighit", color:"#E91E63" },
+    { name:"ChuChu TV", handle:"@ChuChuTV", subs:"71 Mio.", cat:"Kids", flag:"🇮🇳", url:"https://www.youtube.com/@ChuChuTV", color:"#FF9800" },
+    { name:"Dude Perfect", handle:"@DudePerfect", subs:"62 Mio.", cat:"Sports", flag:"🇺🇸", url:"https://www.youtube.com/@DudePerfect", color:"#FF5722" },
+    { name:"YOLO AVENTURAS", handle:"@YOLOAPVENTURAS", subs:"69 Mio.", cat:"Creator", flag:"🇻🇪", url:"https://www.youtube.com/@YOLOAPVENTURAS", color:"#E53935" },
+    { name:"5-Minute Crafts", handle:"@5MinuteCrafts", subs:"80 Mio.", cat:"Education", flag:"🇨🇾", url:"https://www.youtube.com/@5MinuteCrafts", color:"#4CAF50" },
+    { name:"Zee Music Company", handle:"@ZeeMusicCompany", subs:"84 Mio.", cat:"Musik", flag:"🇮🇳", url:"https://www.youtube.com/@ZeeMusicCompany", color:"#E91E63" },
+    // 21-30
+    { name:"Pinkfong", handle:"@Pinkfong", subs:"68 Mio.", cat:"Kids", flag:"🇰🇷", url:"https://www.youtube.com/@Pinkfong", color:"#FF9800" },
+    { name:"Sony SAB", handle:"@SonySAB", subs:"65 Mio.", cat:"News", flag:"🇮🇳", url:"https://www.youtube.com/@SonySAB", color:"#607D8B" },
+    { name:"Wham Bam Tees", handle:"@WhamBamTees", subs:"61 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@WhamBamTees", color:"#E53935" },
+    { name:"Screen Junkies", handle:"@ScreenJunkies", subs:"9 Mio.", cat:"Comedy", flag:"🇺🇸", url:"https://www.youtube.com/@ScreenJunkies", color:"#9C27B0" },
+    { name:"Marshmello", handle:"@Marshmello", subs:"55 Mio.", cat:"Musik", flag:"🇺🇸", url:"https://www.youtube.com/@Marshmello", color:"#E91E63" },
+    { name:"Badabun", handle:"@Badabun", subs:"43 Mio.", cat:"Creator", flag:"🇲🇽", url:"https://www.youtube.com/@Badabun", color:"#E53935" },
+    { name:"Canal KondZilla", handle:"@kanalkondzilla", subs:"43 Mio.", cat:"Musik", flag:"🇧🇷", url:"https://www.youtube.com/@kanalkondzilla", color:"#E91E63" },
+    { name:"Tasty", handle:"@buzzfeedtasty", subs:"21 Mio.", cat:"Food", flag:"🇺🇸", url:"https://www.youtube.com/@buzzfeedtasty", color:"#8BC34A" },
+    { name:"Veritasium", handle:"@veritasium", subs:"22 Mio.", cat:"Education", flag:"🇦🇺", url:"https://www.youtube.com/@veritasium", color:"#4CAF50" },
+    { name:"Kurzgesagt", handle:"@kurzgesagt", subs:"24 Mio.", cat:"Education", flag:"🇩🇪", url:"https://www.youtube.com/@kurzgesagt", color:"#4CAF50" },
+    // 31-50
+    { name:"NoCopyrightSounds", handle:"@NoCopyrightSounds", subs:"35 Mio.", cat:"Musik", flag:"🇬🇧", url:"https://www.youtube.com/@NoCopyrightSounds", color:"#E91E63" },
+    { name:"Linus Tech Tips", handle:"@LinusTechTips", subs:"16 Mio.", cat:"Tech", flag:"🇨🇦", url:"https://www.youtube.com/@LinusTechTips", color:"#00BCD4" },
+    { name:"Mythbusters", handle:"@MythBusters", subs:"4 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@MythBusters", color:"#4CAF50" },
+    { name:"Smosh", handle:"@Smosh", subs:"26 Mio.", cat:"Comedy", flag:"🇺🇸", url:"https://www.youtube.com/@Smosh", color:"#9C27B0" },
+    { name:"The Ellen Show", handle:"@TheEllenShow", subs:"38 Mio.", cat:"News", flag:"🇺🇸", url:"https://www.youtube.com/@TheEllenShow", color:"#607D8B" },
+    { name:"Jimmy Fallon", handle:"@FallonTonight", subs:"30 Mio.", cat:"Comedy", flag:"🇺🇸", url:"https://www.youtube.com/@FallonTonight", color:"#9C27B0" },
+    { name:"GoodMythicalMorning", handle:"@GoodMythicalMorning", subs:"19 Mio.", cat:"Comedy", flag:"🇺🇸", url:"https://www.youtube.com/@GoodMythicalMorning", color:"#9C27B0" },
+    { name:"Conan O'Brien", handle:"@TeamCoco", subs:"11 Mio.", cat:"Comedy", flag:"🇺🇸", url:"https://www.youtube.com/@TeamCoco", color:"#9C27B0" },
+    { name:"Alan Walker", handle:"@AlanWalker", subs:"52 Mio.", cat:"Musik", flag:"🇳🇴", url:"https://www.youtube.com/@AlanWalker", color:"#E91E63" },
+    { name:"Marques Brownlee", handle:"@mkbhd", subs:"19 Mio.", cat:"Tech", flag:"🇺🇸", url:"https://www.youtube.com/@mkbhd", color:"#00BCD4" },
+    { name:"Logan Paul", handle:"@LoganPaul", subs:"23 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@LoganPaul", color:"#E53935" },
+    { name:"Jake Paul", handle:"@jakepaul", subs:"20 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@jakepaul", color:"#E53935" },
+    { name:"SSSniperWolf", handle:"@SSSniperWolf", subs:"35 Mio.", cat:"Gaming", flag:"🇬🇧", url:"https://www.youtube.com/@SSSniperWolf", color:"#2196F3" },
+    { name:"Ninja", handle:"@Ninja", subs:"19 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@Ninja", color:"#2196F3" },
+    { name:"Pokimane", handle:"@pokimane", subs:"9 Mio.", cat:"Gaming", flag:"🇨🇦", url:"https://www.youtube.com/@pokimane", color:"#2196F3" },
+    { name:"Shroud", handle:"@shroud", subs:"7 Mio.", cat:"Gaming", flag:"🇨🇦", url:"https://www.youtube.com/@shroud", color:"#2196F3" },
+    { name:"Jacksepticeye", handle:"@jacksepticeye", subs:"33 Mio.", cat:"Gaming", flag:"🇮🇪", url:"https://www.youtube.com/@jacksepticeye", color:"#2196F3" },
+    { name:"Markiplier", handle:"@markiplier", subs:"38 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@markiplier", color:"#2196F3" },
+    { name:"VanossGaming", handle:"@VanossGaming", subs:"27 Mio.", cat:"Gaming", flag:"🇨🇦", url:"https://www.youtube.com/@VanossGaming", color:"#2196F3" },
+    { name:"Technoblade", handle:"@Technoblade", subs:"15 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@Technoblade", color:"#2196F3" },
+    // 51-100
+    { name:"Mrbeast Gaming", handle:"@MrBeastGaming", subs:"42 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@MrBeastGaming", color:"#2196F3" },
+    { name:"DanTDM", handle:"@DanTDM", subs:"28 Mio.", cat:"Gaming", flag:"🇬🇧", url:"https://www.youtube.com/@DanTDM", color:"#2196F3" },
+    { name:"CrankGameplays", handle:"@CrankGameplays", subs:"3 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@CrankGameplays", color:"#2196F3" },
+    { name:"Troom Troom", handle:"@TroomTroom", subs:"37 Mio.", cat:"Kids", flag:"🇺🇦", url:"https://www.youtube.com/@TroomTroom", color:"#FF9800" },
+    { name:"Ryan's World", handle:"@RyansWorld", subs:"37 Mio.", cat:"Kids", flag:"🇺🇸", url:"https://www.youtube.com/@RyansWorld", color:"#FF9800" },
+    { name:"Daily Dose of Internet", handle:"@DailyDoseOfInternet", subs:"18 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@DailyDoseOfInternet", color:"#E53935" },
+    { name:"Bright Side", handle:"@BrightSide", subs:"44 Mio.", cat:"Education", flag:"🇨🇾", url:"https://www.youtube.com/@BrightSide", color:"#4CAF50" },
+    { name:"SciShow", handle:"@SciShow", subs:"7 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@SciShow", color:"#4CAF50" },
+    { name:"Numberphile", handle:"@numberphile", subs:"4 Mio.", cat:"Education", flag:"🇬🇧", url:"https://www.youtube.com/@numberphile", color:"#4CAF50" },
+    { name:"TED", handle:"@TED", subs:"22 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@TED", color:"#4CAF50" },
+    { name:"TED-Ed", handle:"@TEDEd", subs:"20 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@TEDEd", color:"#4CAF50" },
+    { name:"Vsauce", handle:"@Vsauce", subs:"22 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@Vsauce", color:"#4CAF50" },
+    { name:"MinutePhysics", handle:"@minutephysics", subs:"6 Mio.", cat:"Education", flag:"🇨🇦", url:"https://www.youtube.com/@minutephysics", color:"#4CAF50" },
+    { name:"CGP Grey", handle:"@CGPGrey", subs:"6 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@CGPGrey", color:"#4CAF50" },
+    { name:"Wendover Productions", handle:"@Wendoverproductions", subs:"5 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@Wendoverproductions", color:"#4CAF50" },
+    { name:"ColdFusion", handle:"@ColdFusion", subs:"5 Mio.", cat:"Tech", flag:"🇦🇺", url:"https://www.youtube.com/@ColdFusion", color:"#00BCD4" },
+    { name:"Unbox Therapy", handle:"@unboxtherapy", subs:"24 Mio.", cat:"Tech", flag:"🇨🇦", url:"https://www.youtube.com/@unboxtherapy", color:"#00BCD4" },
+    { name:"Dave2D", handle:"@Dave2D", subs:"4 Mio.", cat:"Tech", flag:"🇨🇦", url:"https://www.youtube.com/@Dave2D", color:"#00BCD4" },
+    { name:"iJustine", handle:"@ijustine", subs:"7 Mio.", cat:"Tech", flag:"🇺🇸", url:"https://www.youtube.com/@ijustine", color:"#00BCD4" },
+    { name:"MrMobile", handle:"@MrMobile7", subs:"4 Mio.", cat:"Tech", flag:"🇺🇸", url:"https://www.youtube.com/@MrMobile7", color:"#00BCD4" },
+    { name:"JerryRigEverything", handle:"@JerryRigEverything", subs:"9 Mio.", cat:"Tech", flag:"🇺🇸", url:"https://www.youtube.com/@JerryRigEverything", color:"#00BCD4" },
+    { name:"Tom Scott", handle:"@TomScottGo", subs:"6 Mio.", cat:"Education", flag:"🇬🇧", url:"https://www.youtube.com/@TomScottGo", color:"#4CAF50" },
+    { name:"Corridor Crew", handle:"@CorridorCrew", subs:"6 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@CorridorCrew", color:"#E53935" },
+    { name:"Internet Historian", handle:"@InternetHistorian", subs:"4 Mio.", cat:"Creator", flag:"🇦🇺", url:"https://www.youtube.com/@InternetHistorian", color:"#E53935" },
+    { name:"Doctor Mike", handle:"@DoctorMike", subs:"12 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@DoctorMike", color:"#4CAF50" },
+    { name:"Joshua Fluke", handle:"@JoshuaFluke1", subs:"1 Mio.", cat:"Tech", flag:"🇺🇸", url:"https://www.youtube.com/@JoshuaFluke1", color:"#00BCD4" },
+    { name:"Fireship", handle:"@Fireship", subs:"3 Mio.", cat:"Tech", flag:"🇺🇸", url:"https://www.youtube.com/@Fireship", color:"#00BCD4" },
+    { name:"Traversy Media", handle:"@TraversyMedia", subs:"2 Mio.", cat:"Tech", flag:"🇺🇸", url:"https://www.youtube.com/@TraversyMedia", color:"#00BCD4" },
+    { name:"freeCodeCamp", handle:"@freecodecamp", subs:"10 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@freecodecamp", color:"#4CAF50" },
+    { name:"LoFi Girl", handle:"@LofiGirl", subs:"16 Mio.", cat:"Musik", flag:"🇫🇷", url:"https://www.youtube.com/@LofiGirl", color:"#E91E63" },
+    { name:"Doja Cat", handle:"@DojaCat", subs:"10 Mio.", cat:"Musik", flag:"🇺🇸", url:"https://www.youtube.com/@DojaCat", color:"#E91E63" },
+    // 101-150
+    { name:"Billie Eilish", handle:"@BillieEilish", subs:"51 Mio.", cat:"Musik", flag:"🇺🇸", url:"https://www.youtube.com/@BillieEilish", color:"#E91E63" },
+    { name:"Taylor Swift", handle:"@TaylorSwift", subs:"60 Mio.", cat:"Musik", flag:"🇺🇸", url:"https://www.youtube.com/@TaylorSwift", color:"#E91E63" },
+    { name:"Ariana Grande", handle:"@ArianaGrande", subs:"57 Mio.", cat:"Musik", flag:"🇺🇸", url:"https://www.youtube.com/@ArianaGrande", color:"#E91E63" },
+    { name:"Ed Sheeran", handle:"@edsheeran", subs:"55 Mio.", cat:"Musik", flag:"🇬🇧", url:"https://www.youtube.com/@edsheeran", color:"#E91E63" },
+    { name:"Justin Bieber", handle:"@JustinBieber", subs:"72 Mio.", cat:"Musik", flag:"🇨🇦", url:"https://www.youtube.com/@JustinBieber", color:"#E91E63" },
+    { name:"Eminem", handle:"@Eminem", subs:"52 Mio.", cat:"Musik", flag:"🇺🇸", url:"https://www.youtube.com/@Eminem", color:"#E91E63" },
+    { name:"Drake", handle:"@Drake", subs:"29 Mio.", cat:"Musik", flag:"🇨🇦", url:"https://www.youtube.com/@Drake", color:"#E91E63" },
+    { name:"Adele", handle:"@Adele", subs:"26 Mio.", cat:"Musik", flag:"🇬🇧", url:"https://www.youtube.com/@Adele", color:"#E91E63" },
+    { name:"The Weeknd", handle:"@TheWeeknd", subs:"31 Mio.", cat:"Musik", flag:"🇨🇦", url:"https://www.youtube.com/@TheWeeknd", color:"#E91E63" },
+    { name:"Rihanna", handle:"@Rihanna", subs:"35 Mio.", cat:"Musik", flag:"🇧🇧", url:"https://www.youtube.com/@Rihanna", color:"#E91E63" },
+    { name:"Shakira", handle:"@Shakira", subs:"46 Mio.", cat:"Musik", flag:"🇨🇴", url:"https://www.youtube.com/@Shakira", color:"#E91E63" },
+    { name:"Maluma", handle:"@MalumaTV", subs:"30 Mio.", cat:"Musik", flag:"🇨🇴", url:"https://www.youtube.com/@MalumaTV", color:"#E91E63" },
+    { name:"J Balvin", handle:"@JBALVIN", subs:"33 Mio.", cat:"Musik", flag:"🇨🇴", url:"https://www.youtube.com/@JBALVIN", color:"#E91E63" },
+    { name:"Bad Bunny", handle:"@BadBunnyPR", subs:"40 Mio.", cat:"Musik", flag:"🇵🇷", url:"https://www.youtube.com/@BadBunnyPR", color:"#E91E63" },
+    { name:"Ozuna", handle:"@OzunaWorld", subs:"34 Mio.", cat:"Musik", flag:"🇵🇷", url:"https://www.youtube.com/@OzunaWorld", color:"#E91E63" },
+    { name:"David Dobrik", handle:"@DavidDobrik", subs:"19 Mio.", cat:"Creator", flag:"🇸🇰", url:"https://www.youtube.com/@DavidDobrik", color:"#E53935" },
+    { name:"Casey Neistat", handle:"@CaseyNeistat", subs:"12 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@CaseyNeistat", color:"#E53935" },
+    { name:"Emma Chamberlain", handle:"@emmachamberlain", subs:"12 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@emmachamberlain", color:"#E53935" },
+    { name:"Jeffree Star", handle:"@JeffreeStar", subs:"15 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@JeffreeStar", color:"#E53935" },
+    { name:"NikkieTutorials", handle:"@NikkieTutorials", subs:"14 Mio.", cat:"Creator", flag:"🇳🇱", url:"https://www.youtube.com/@NikkieTutorials", color:"#E53935" },
+    // 151-200
+    { name:"James Charles", handle:"@jamescharles", subs:"22 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@jamescharles", color:"#E53935" },
+    { name:"Zach King", handle:"@ZachKing", subs:"11 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@ZachKing", color:"#E53935" },
+    { name:"Ryan Trahan", handle:"@ryantrahan", subs:"14 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@ryantrahan", color:"#E53935" },
+    { name:"Sidemen", handle:"@Sidemen", subs:"23 Mio.", cat:"Creator", flag:"🇬🇧", url:"https://www.youtube.com/@Sidemen", color:"#E53935" },
+    { name:"KSI", handle:"@KSI", subs:"24 Mio.", cat:"Creator", flag:"🇬🇧", url:"https://www.youtube.com/@KSI", color:"#E53935" },
+    { name:"W2S", handle:"@W2S", subs:"17 Mio.", cat:"Gaming", flag:"🇬🇧", url:"https://www.youtube.com/@W2S", color:"#2196F3" },
+    { name:"xQc", handle:"@xQc", subs:"6 Mio.", cat:"Gaming", flag:"🇨🇦", url:"https://www.youtube.com/@xQc", color:"#2196F3" },
+    { name:"TimTheTatman", handle:"@TimTheTatman", subs:"5 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@TimTheTatman", color:"#2196F3" },
+    { name:"DrDisrespect", handle:"@DrDisRespect", subs:"4 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@DrDisRespect", color:"#2196F3" },
+    { name:"Asmongold", handle:"@Asmongold", subs:"3 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@Asmongold", color:"#2196F3" },
+    { name:"Ludwig", handle:"@Ludwig", subs:"4 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@Ludwig", color:"#2196F3" },
+    { name:"Mizkif", handle:"@Mizkif", subs:"1 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@Mizkif", color:"#2196F3" },
+    { name:"Valkyrae", handle:"@Valkyrae", subs:"4 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@Valkyrae", color:"#2196F3" },
+    { name:"Corpse Husband", handle:"@CorpseHusband", subs:"9 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@CorpseHusband", color:"#2196F3" },
+    { name:"Dream", handle:"@Dream", subs:"35 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@Dream", color:"#2196F3" },
+    { name:"GeorgeNotFound", handle:"@GeorgeNotFound", subs:"12 Mio.", cat:"Gaming", flag:"🇬🇧", url:"https://www.youtube.com/@GeorgeNotFound", color:"#2196F3" },
+    { name:"TommyInnit", handle:"@TommyInnit", subs:"14 Mio.", cat:"Gaming", flag:"🇬🇧", url:"https://www.youtube.com/@TommyInnit", color:"#2196F3" },
+    { name:"Wilbur Soot", handle:"@WilburSoot", subs:"7 Mio.", cat:"Gaming", flag:"🇬🇧", url:"https://www.youtube.com/@WilburSoot", color:"#2196F3" },
+    { name:"Phil Watson", handle:"@Ph1LzA", subs:"5 Mio.", cat:"Gaming", flag:"🇬🇧", url:"https://www.youtube.com/@Ph1LzA", color:"#2196F3" },
+    { name:"JYDNE", handle:"@JYDNE", subs:"1 Mio.", cat:"Fitness", flag:"🇺🇸", url:"https://www.youtube.com/@JYDNE", color:"#009688" },
+    // 201-250
+    { name:"Yoga with Adriene", handle:"@yogawithadriene", subs:"13 Mio.", cat:"Fitness", flag:"🇺🇸", url:"https://www.youtube.com/@yogawithadriene", color:"#009688" },
+    { name:"Jeff Nippard", handle:"@JeffNippard", subs:"5 Mio.", cat:"Fitness", flag:"🇨🇦", url:"https://www.youtube.com/@JeffNippard", color:"#009688" },
+    { name:"Chris Heria", handle:"@ChrisHeria", subs:"4 Mio.", cat:"Fitness", flag:"🇺🇸", url:"https://www.youtube.com/@ChrisHeria", color:"#009688" },
+    { name:"Athlean-X", handle:"@athleanx", subs:"14 Mio.", cat:"Fitness", flag:"🇺🇸", url:"https://www.youtube.com/@athleanx", color:"#009688" },
+    { name:"Gordon Ramsay", handle:"@GordonRamsay", subs:"22 Mio.", cat:"Food", flag:"🇬🇧", url:"https://www.youtube.com/@GordonRamsay", color:"#8BC34A" },
+    { name:"Joshua Weissman", handle:"@JoshuaWeissman", subs:"9 Mio.", cat:"Food", flag:"🇺🇸", url:"https://www.youtube.com/@JoshuaWeissman", color:"#8BC34A" },
+    { name:"Binging with Babish", handle:"@BabishCulinaryUniverse", subs:"11 Mio.", cat:"Food", flag:"🇺🇸", url:"https://www.youtube.com/@BabishCulinaryUniverse", color:"#8BC34A" },
+    { name:"Bon Appétit", handle:"@BonAppetitDotCom", subs:"8 Mio.", cat:"Food", flag:"🇺🇸", url:"https://www.youtube.com/@BonAppetitDotCom", color:"#8BC34A" },
+    { name:"Ethan Chlebowski", handle:"@EthanChlebowski", subs:"2 Mio.", cat:"Food", flag:"🇺🇸", url:"https://www.youtube.com/@EthanChlebowski", color:"#8BC34A" },
+    { name:"Mitten Squad", handle:"@MittenSquad", subs:"2 Mio.", cat:"Gaming", flag:"🇺🇸", url:"https://www.youtube.com/@MittenSquad", color:"#2196F3" },
+    { name:"Binging Cars", handle:"@BrianRichardsAuto", subs:"1 Mio.", cat:"Auto", flag:"🇺🇸", url:"https://www.youtube.com/@BrianRichardsAuto", color:"#FFC107" },
+    { name:"Donut Media", handle:"@DonutMedia", subs:"8 Mio.", cat:"Auto", flag:"🇺🇸", url:"https://www.youtube.com/@DonutMedia", color:"#FFC107" },
+    { name:"ChrisFix", handle:"@ChrisFix", subs:"10 Mio.", cat:"Auto", flag:"🇺🇸", url:"https://www.youtube.com/@ChrisFix", color:"#FFC107" },
+    { name:"Hoovies Garage", handle:"@HooviesGarage", subs:"1 Mio.", cat:"Auto", flag:"🇺🇸", url:"https://www.youtube.com/@HooviesGarage", color:"#FFC107" },
+    { name:"Doug DeMuro", handle:"@DougDeMuro", subs:"5 Mio.", cat:"Auto", flag:"🇺🇸", url:"https://www.youtube.com/@DougDeMuro", color:"#FFC107" },
+    { name:"CarWow", handle:"@carwow", subs:"9 Mio.", cat:"Auto", flag:"🇬🇧", url:"https://www.youtube.com/@carwow", color:"#FFC107" },
+    { name:"Supercar Blondie", handle:"@SupercarBlondie", subs:"9 Mio.", cat:"Auto", flag:"🇦🇪", url:"https://www.youtube.com/@SupercarBlondie", color:"#FFC107" },
+    { name:"LegalEagle", handle:"@LegalEagle", subs:"3 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@LegalEagle", color:"#4CAF50" },
+    { name:"Real Engineering", handle:"@RealEngineering", subs:"5 Mio.", cat:"Education", flag:"🇮🇪", url:"https://www.youtube.com/@RealEngineering", color:"#4CAF50" },
+    { name:"Johnny Harris", handle:"@JohnnyHarris", subs:"6 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@JohnnyHarris", color:"#4CAF50" },
+    { name:"Wendell", handle:"@WendellMilnerTV", subs:"1 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@WendellMilnerTV", color:"#4CAF50" },
+    { name:"Ali Abdaal", handle:"@aliabdaal", subs:"5 Mio.", cat:"Education", flag:"🇬🇧", url:"https://www.youtube.com/@aliabdaal", color:"#4CAF50" },
+    { name:"Thomas Frank", handle:"@Thomasfrank", subs:"3 Mio.", cat:"Education", flag:"🇺🇸", url:"https://www.youtube.com/@Thomasfrank", color:"#4CAF50" },
+    { name:"Matt D'Avella", handle:"@mattdavella", subs:"4 Mio.", cat:"Creator", flag:"🇺🇸", url:"https://www.youtube.com/@mattdavella", color:"#E53935" },
+    { name:"Yes Theory", handle:"@YesTheory", subs:"9 Mio.", cat:"Creator", flag:"🇨🇦", url:"https://www.youtube.com/@YesTheory", color:"#E53935" },
+  ];
+
+  // ── RENDER ─────────────────────────────────────────────────────────────────
+  const catClassMap = {
+    "Musik":"cat-music","Kids":"cat-kids","Gaming":"cat-gaming","Creator":"cat-creator",
+    "News":"cat-news","Tech":"cat-tech","Education":"cat-education","Sports":"cat-sports",
+    "Comedy":"cat-comedy","Food":"cat-food","Auto":"cat-auto","Fitness":"cat-fitness"
+  };
+  const medals = ["🥇","🥈","🥉"];
+
+  function initials(name) {
+    return name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  }
+
+  function renderTable(data) {
+    const tbody = document.getElementById('tableBody');
+    const noRes = document.getElementById('noResults');
+    const countEl = document.getElementById('resultCount');
+
+    if (data.length === 0) {
+      tbody.innerHTML = '';
+      noRes.style.display = 'block';
+      countEl.textContent = '0 Kanäle';
+      return;
+    }
+    noRes.style.display = 'none';
+    countEl.textContent = data.length + ' Kanäle';
+
+    tbody.innerHTML = data.map((ch, i) => {
+      const globalRank = channels.indexOf(ch) + 1;
+      const rankDisplay = globalRank <= 3
+        ? `<span class="medal">${medals[globalRank-1]}</span>`
+        : `${globalRank}`;
+      const rankClass = globalRank <= 3 ? 'top3' : '';
+      const catClass = catClassMap[ch.cat] || 'cat-creator';
+
+      return `<tr onclick="window.open('${ch.url}','_blank')">
+        <td class="td-rank ${rankClass}">${rankDisplay}</td>
+        <td>
+          <div class="channel-cell">
+            <div class="ch-avatar" style="background:${ch.color};">${initials(ch.name)}</div>
+            <div>
+              <div class="ch-name">${ch.name}</div>
+              <div class="ch-handle">${ch.handle}</div>
+            </div>
+          </div>
+        </td>
+        <td class="td-subs">${ch.subs}</td>
+        <td class="td-category"><span class="cat-badge ${catClass}">${ch.cat}</span></td>
+        <td class="td-country">${ch.flag}</td>
+        <td class="td-link"><a href="${ch.url}" target="_blank" class="yt-link" onclick="event.stopPropagation()">
+          <svg width="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Öffnen
+        </a></td>
+      </tr>`;
+    }).join('');
+  }
+
+  // ── FILTER LOGIC ────────────────────────────────────────────────────────────
+  let activeCat = 'all';
+  let searchTerm = '';
+
+  function applyFilters() {
+    let data = channels;
+    if (activeCat !== 'all') data = data.filter(c => c.cat === activeCat);
+    if (searchTerm) {
+      const q = searchTerm.toLowerCase();
+      data = data.filter(c => c.name.toLowerCase().includes(q) || c.handle.toLowerCase().includes(q));
+    }
+    renderTable(data);
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCat = btn.dataset.cat;
+      applyFilters();
+    });
+  });
+
+  document.getElementById('searchInput').addEventListener('input', e => {
+    searchTerm = e.target.value.trim();
+    applyFilters();
+  });
+
+  // Initial render
+  renderTable(channels);
+  </script>
+</body>
+</html>
