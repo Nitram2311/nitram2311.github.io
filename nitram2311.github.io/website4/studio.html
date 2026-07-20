@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Studio — ViewTube</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Studio Page Styles */
+    .studio-hero {
+      padding: 140px 0 80px;
+      background:
+        radial-gradient(ellipse 50% 60% at 30% 50%, rgba(255,0,0,0.1) 0%, transparent 70%),
+        linear-gradient(135deg, #0F0F0F 0%, #1a0808 50%, #0F0F0F 100%);
+      position: relative; overflow: hidden;
+    }
+    .studio-hero-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .studio-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.2);
+      border-radius: 100px; padding: 6px 16px; margin-bottom: 20px;
+      font-size: 0.78rem; color: var(--red); font-weight: 600;
+    }
+    .studio-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 20px;
+    }
+    .studio-desc { font-size: 1.05rem; color: var(--light); line-height: 1.7; margin-bottom: 32px; }
+    .studio-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Dashboard Mockup */
+    .dashboard-mockup {
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+    }
+    .dash-bar {
+      background: #111; padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .dash-bar-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-display); font-size: 0.95rem; font-weight: 700;
+    }
+    .dash-bar-logo span { color: var(--red); }
+    .dash-dots { display: flex; gap: 6px; }
+    .dash-content { padding: 20px; }
+    .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .dash-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px; padding: 14px;
+    }
+    .dash-card-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+    .dash-card-value { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; }
+    .dash-card-sub { font-size: 0.7rem; color: #4CAF50; margin-top: 4px; }
+    .dash-bar-chart { display: flex; align-items: flex-end; gap: 5px; height: 60px; margin-bottom: 16px; }
+    .dash-bar-item {
+      flex: 1; background: rgba(255,0,0,0.25); border-radius: 2px 2px 0 0;
+      min-height: 8px; transition: background 0.2s;
+    }
+    .dash-bar-item:hover { background: var(--red); }
+    .dash-bar-item.highlight { background: var(--red); }
+    .dash-recent-title { font-size: 0.75rem; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .dash-video-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .dash-video-thumb {
+      width: 40px; height: 28px; border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .dash-video-info { flex: 1; }
+    .dash-video-name { font-size: 0.75rem; font-weight: 500; margin-bottom: 2px; }
+    .dash-video-stat { font-size: 0.68rem; color: var(--muted); }
+    .dash-video-views { font-size: 0.75rem; font-weight: 600; color: var(--light); }
+
+    /* Features Grid */
+    .studio-features { padding: 100px 0; background: var(--dark); }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-top: 56px;
+    }
+    .feature-card {
+      background: var(--dark-2); border-radius: 10px; padding: 28px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover { border-color: var(--red); transform: translateY(-4px); }
+    .feature-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px; font-size: 1.3rem;
+    }
+    .feature-card-title { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+    .feature-card-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+    .feature-card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--red); font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; margin-top: 16px;
+      transition: gap 0.2s;
+    }
+    .feature-card-link:hover { gap: 10px; }
+
+    /* Steps Section */
+    .steps-section { padding: 100px 0; }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      margin-top: 56px; position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute; top: 28px; left: 12.5%; right: 12.5%;
+      height: 1px; background: linear-gradient(90deg, rgba(255,0,0,0.5), rgba(255,0,0,0.2), rgba(255,0,0,0.5));
+      z-index: 0;
+    }
+    .step { padding: 0 16px; text-align: center; position: relative; z-index: 1; }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--dark); border: 2px solid var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--red);
+      margin: 0 auto 20px;
+    }
+    .step-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; }
+    .step-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+    /* CTA */
+    .studio-cta { padding: 120px 0; text-align: center; background: var(--dark); }
+    .studio-cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700; letter-spacing: -0.04em; margin-bottom: 16px;
+    }
+    .studio-cta-title strong { color: var(--red); }
+    .studio-cta-sub { color: var(--light); margin-bottom: 36px; font-size: 1.05rem; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    @media (max-width: 900px) {
+      .studio-hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .steps-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .steps-grid::before { display: none; }
+    }
+    @media (max-width: 560px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor"></div>
+  <div class="cursor-ring"></div>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      ViewTube
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Startseite</a></li>
+      <li><a href="top250.html">Top 250</a></li>
+      <li><a href="studio.html" style="color:var(--white)">Studio</a></li>
+      <li><a href="trends.html">Trends</a></li>
+    </ul>
+    <a href="https://studio.youtube.com" target="_blank" class="nav-cta">Studio öffnen ↗</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="studio-hero">
+    <div class="studio-hero-inner">
+      <div>
+        <div class="studio-badge">🎬 Creator Tools</div>
+        <h1 class="studio-title">Dein Channel.<br/>Dein Studio.<br/><em style="color:var(--red);font-style:normal;">Dein Wachstum.</em></h1>
+        <p class="studio-desc">
+          YouTube Studio ist deine Kommandozentrale — verwalte Videos, analysiere
+          Daten, antworte auf Kommentare und steigere deinen Channel, alles an einem Ort.
+        </p>
+        <div class="studio-btns">
+          <a href="https://studio.youtube.com" target="_blank" class="btn-primary">
+            <svg width="16" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            YouTube Studio öffnen
+          </a>
+          <a href="https://www.youtube.com/creators/" target="_blank" class="btn-secondary">
+            Creator Academy ↗
+          </a>
+        </div>
+      </div>
+      <!-- Dashboard Mockup -->
+      <div class="dashboard-mockup reveal">
+        <div class="dash-bar">
+          <div class="dash-bar-logo">
+            <div class="nav-logo-icon" style="width:28px;height:20px;border-radius:4px;">
+              <svg viewBox="0 0 24 24" width="11" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            YouTube <span>Studio</span>
+          </div>
+          <div class="dash-dots">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+          </div>
+        </div>
+        <div class="dash-content">
+          <div class="dash-grid">
+            <div class="dash-card">
+              <div class="dash-card-label">Aufrufe (30 Tage)</div>
+              <div class="dash-card-value">124.5K</div>
+              <div class="dash-card-sub">↑ +18% vs. Vormonat</div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-label">Abonnenten</div>
+              <div class="dash-card-value">8.2K</div>
+              <div class="dash-card-sub">↑ +340 diese Woche</div>
+            </div>
+          </div>
+          <div class="dash-bar-chart">
+            <div class="dash-bar-item" style="height:30%"></div>
+            <div class="dash-bar-item" style="height:45%"></div>
+            <div class="dash-bar-item" style="height:38%"></div>
+            <div class="dash-bar-item" style="height:60%"></div>
+            <div class="dash-bar-item" style="height:55%"></div>
+            <div class="dash-bar-item highlight" style="height:80%"></div>
+            <div class="dash-bar-item" style="height:70%"></div>
+          </div>
+          <div class="dash-recent-title">Neueste Videos</div>
+          <div class="dash-video-row">
+            <div class="dash-video-thumb" style="background:linear-gradient(135deg,#2d1515,#4a1a1a);"></div>
+            <div class="dash-video-info">
+              <div class="dash-video-name">Mein erstes Tutorial!</div>
+              <div class="dash-video-stat">Veröffentlicht · vor 2 Tagen</div>
+            </div>
+            <div class="dash-video-views">42.1K</div>
+          </div>
+          <div class="dash-video-row">
+            <div class="dash-video-thumb" style="background:linear-gradient(135deg,#0d2137,#1a3d52);"></div>
+            <div class="dash-video-info">
+              <div class="dash-video-name">Q&A — eure Fragen!</div>
+              <div class="dash-video-stat">Veröffentlicht · vor 1 Woche</div>
+            </div>
+            <div class="dash-video-views">18.7K</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="studio-features">
+    <div class="section-inner">
+      <span class="section-label reveal">Was du bekommst</span>
+      <h2 class="section-title reveal reveal-delay-1">Alles, was du als Creator brauchst.</h2>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon">📊</div>
+          <div class="feature-card-title">Analytics</div>
+          <div class="feature-card-desc">Detaillierte Einblicke in Watch-Time, Traffic-Quellen, Zuschauer-Demografie und Klickraten — in Echtzeit.</div>
+          <a href="https://studio.youtube.com/channel/analytics" target="_blank" class="feature-card-link">Analytics öffnen →</a>
+        </div>
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon">🎬</div>
+          <div class="feature-card-title">Video Manager</div>
+          <div class="feature-card-desc">Verwalte, bearbeite und optimiere alle deine Videos — Titel, Beschreibungen, Tags und Thumbnails inklusive.</div>
+          <a href="https://studio.youtube.com/channel/videos" target="_blank" class="feature-card-link">Videos verwalten →</a>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon">💬</div>
+          <div class="feature-card-title">Kommentare</div>
+          <div class="feature-card-desc">Antworte auf Kommentare, moderiere Diskussionen und baue eine echte Community rund um deinen Channel.</div>
+          <a href="https://studio.youtube.com/channel/comments" target="_blank" class="feature-card-link">Kommentare ansehen →</a>
+        </div>
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon">💰</div>
+          <div class="feature-card-title">Monetarisierung</div>
+          <div class="feature-card-desc">Verwalte dein Partnerprogramm, Super Thanks, Memberships und prüfe deine Einnahmen und Auszahlungen.</div>
+          <a href="https://studio.youtube.com/channel/monetization" target="_blank" class="feature-card-link">Einnahmen einsehen →</a>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-card-title">Channel Branding</div>
+          <div class="feature-card-desc">Gestalte dein Channel-Layout, Bannerbild, Profilbild und präsentiere dich professionell nach außen.</div>
+          <a href="https://studio.youtube.com/channel/customization" target="_blank" class="feature-card-link">Channel anpassen →</a>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-icon">🔔</div>
+          <div class="feature-card-title">Benachrichtigungen</div>
+          <div class="feature-card-desc">Bleib immer auf dem Laufenden — neue Abonnenten, Kommentare, Milestones und wichtige YouTube-Updates.</div>
+          <a href="https://studio.youtube.com" target="_blank" class="feature-card-link">Studio öffnen →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps-section">
+    <div class="section-inner">
+      <span class="section-label reveal">Wie du anfängst</span>
+      <h2 class="section-title reveal reveal-delay-1">In 4 Schritten zum eigenen Channel.</h2>
+      <div class="steps-grid">
+        <div class="step reveal">
+          <div class="step-num">1</div>
+          <div class="step-title">Google-Konto erstellen</div>
+          <div class="step-desc">Du brauchst ein Google-Konto, um YouTube zu nutzen. Kostenlos in 2 Minuten.</div>
+        </div>
+        <div class="step reveal reveal-delay-1">
+          <div class="step-num">2</div>
+          <div class="step-title">Channel einrichten</div>
+          <div class="step-desc">Wähle einen Namen, lade ein Profilbild hoch und schreibe eine kurze Beschreibung.</div>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-num">3</div>
+          <div class="step-title">Erstes Video hochladen</div>
+          <div class="step-desc">Öffne YouTube Studio und lade dein erstes Video hoch — Titel und Thumbnail entscheiden.</div>
+        </div>
+        <div class="step reveal reveal-delay-3">
+          <div class="step-num">4</div>
+          <div class="step-title">Wachsen & monetarisieren</div>
+          <div class="step-desc">Ab 1.000 Abos und 4.000 Stunden Watch-Time wirst du für das Partnerprogramm eligible.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="studio-cta">
+    <div class="section-inner">
+      <h2 class="studio-cta-title reveal">Bereit für dein<br/><strong>YouTube Studio</strong>?</h2>
+      <p class="studio-cta-sub reveal reveal-delay-1">Melde dich an, öffne das Studio und lade dein erstes Video noch heute hoch.</p>
+      <div class="hero-actions reveal reveal-delay-2">
+        <a href="https://studio.youtube.com" target="_blank" class="btn-primary">
+          <svg width="16" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          Jetzt zu YouTube Studio
+        </a>
+        <a href="top250.html" class="btn-secondary">Top 250 Channels</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="nav-logo" style="margin-bottom:12px;display:inline-flex;">
+            <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            ViewTube
+          </a>
+          <p class="footer-brand-desc">Keine offizielle YouTube-Seite. Alle Links führen zu echten YouTube-Seiten.</p>
+        </div>
+        <div>
+          <div class="footer-heading">Seiten</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Startseite</a></li>
+            <li><a href="top250.html">Top 250 Channels</a></li>
+            <li><a href="studio.html">YouTube Studio</a></li>
+            <li><a href="trends.html">Trends 2026</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">YouTube Links</div>
+          <ul class="footer-links">
+            <li><a href="https://studio.youtube.com" target="_blank">YouTube Studio ↗</a></li>
+            <li><a href="https://www.youtube.com/creators/" target="_blank">Creator Academy ↗</a></li>
+            <li><a href="https://support.google.com/youtube" target="_blank">Hilfe-Center ↗</a></li>
+            <li><a href="https://www.youtube.com/t/terms" target="_blank">Nutzungsbedingungen ↗</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Tools</div>
+          <ul class="footer-links">
+            <li><a href="https://www.youtube.com" target="_blank">YouTube.com ↗</a></li>
+            <li><a href="https://music.youtube.com" target="_blank">YouTube Music ↗</a></li>
+            <li><a href="https://www.youtube.com/premium" target="_blank">YouTube Premium ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 ViewTube — Mit <span class="footer-heart">♥</span> gebaut.</span>
+        <span class="footer-copy">Made with Claude</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

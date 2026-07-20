@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Weihnachtsstart — Frohe Weihnachten</title>
+    <meta name="description" content="Weihnachts-Startseite mit Animationen, Lichtern und Link zur Spiele-Seite." />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="shell" role="application" aria-label="Weihnachts-Startseite">
+        <div class="light-string" aria-hidden="true">
+            <div class="light l1"></div>
+            <div class="light l2"></div>
+            <div class="light l3"></div>
+            <div class="light l1"></div>
+            <div class="light l2"></div>
+            <div class="light l3"></div>
+            <div class="light l1"></div>
+        </div>
+
+        <header class="site-header">
+            <div class="brand">
+                <div>
+                    <h1>Frohe Weihnachten</h1>
+                    <p>Willkommen beim Geschenke rechnen</p>
+                </div>
+            </div>
+
+            <nav class="actions" aria-label="Aktionen">
+                <!-- Button top-right leading to Spiele Seite -->
+                <a class="btn primary" href="../Weihnachts-Mathe-Spiel/index.html" title="Zur Spiele-Seite" aria-label="Zur Spiele-Seite" target="_blank" rel="noopener">
+                    Spiel öffnen
+                </a>
+            </nav>
+        </header>
+
+        <main class="stage" role="main" aria-labelledby="heroTitle">
+            <section class="hero card" aria-labelledby="heroTitle">
+                <h2 id="heroTitle" class="greeting">Frohe Weihnachten!</h2>
+                <p class="sub">Eine Website voller winterlicher Dekoration — klicke auf "Spiel öffnen", um direkt zu dem Spiel zu gelangen. Viel Spaß!</p>
+  
+
+
+                <div class="scene" id="tree" aria-hidden="false">
+            <aside class="aside" aria-label="Seitenbereich">
+                <div class="card">
+                    <h3>Was ist das?</h3>   
+                    <p class="small">Eine festliche Startseite mit vielen visuellen Effekten. Nutze den Button oben rechts, um zur Spiele-Seite zu gelangen.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Leichte Interaktion</h3>
+                    <p class="small">Du kannst die Musik an- und ausschalten. Die Schneeflocken werden beim Laden zufällig erzeugt — dies schafft eine lebendige Stimmung.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Technik</h3>
+                    <p class="small">Reine HTML, CSS sowie etwas vanilla JavaScript. Kein externes CDN — alles ist lokal und sicher.</p>
+                </div>  
+            </aside>
+        </main>
+
+        <div class="snow" aria-hidden="true" id="snowContainer"></div>
+
+        <footer class="site-footer" role="contentinfo">
+            <div class="small">Spiel Idee und Konzept · Felix </div>
+            <div class="small">Design & Animationen · Martin</div>
+        </footer>
+    </div>
+</body>
+</html>
