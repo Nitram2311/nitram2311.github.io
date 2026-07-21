@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projekt 2 | Nitram Portfolio</title>
+<style>
+  /* Eigenstaendiges Mini-Styling im Sky-Theme, unabhaengig von style.css,
+     damit diese Platzhalterseite auch fuer sich alleine funktioniert. */
+  :root {
+    --sky-day: #4fa8e0;
+    --cyan-glow: #7fd6ea;
+    --text-dark: #16232f;
+    --text-muted: #4c6478;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(160deg, #f6fbff 0%, #e2f2fd 45%, #cdeafb 100%);
+    color: var(--text-dark);
+    text-align: center;
+    padding: 24px;
+  }
+  .placeholder-card {
+    background: #ffffff;
+    padding: 48px 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 45px rgba(47, 102, 144, 0.18);
+    max-width: 460px;
+  }
+  .placeholder-card h1 { font-size: 1.7rem; margin-bottom: 12px; }
+  .placeholder-card p { color: var(--text-muted); line-height: 1.6; margin-bottom: 26px; }
+  .back-link {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--sky-day), var(--cyan-glow));
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .back-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(47, 102, 144, 0.35);
+  }
+</style>
+</head>
+<body>
+  <!--
+    PLATZHALTER-SEITE fuer "Projekt 2"
+    ------------------------------------------------------------------
+    Ersetze den Inhalt dieses Ordners (website2/) durch dein
+    tatsaechliches Web-Projekt. Wichtig: Der Dateiname "index.html"
+    muss in diesem Ordner erhalten bleiben, damit der Link von der
+    Hauptseite ("Website oeffnen") weiterhin funktioniert.
+  -->
+  <div class="placeholder-card">
+    <h1>🚧 Projekt 2</h1>
+    <p>Dieses Projekt ist noch in Arbeit. Ersetze diese Datei durch den Code deines echten Web-Projekts.</p>
+    <a class="back-link" href="../index.html">← Zurück zum Portfolio</a>
+  </div>
+</body>
+</html>
