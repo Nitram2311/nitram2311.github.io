@@ -1,0 +1,50 @@
+body {
+    background-image: url(bastisrestourant.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.foot {
+    display: flex;
+    flex-direction: column; /* Stapelt die Elemente vertikal */
+    align-items: center; /* Zentriert die Elemente horizontal */
+    font-size: 20px;
+    text-align: center;
+    gap: 10px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+                 0 0 20px rgba(255, 255, 255, 0.6), 
+                 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+.foot {
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.überschrift {
+    display: flex;
+    justify-content: center;
+    font-size: 48px;
+    color: rgb(0, 255, 34); 
+    text-align: center;
+    text-shadow: 0 0 10px rgba(8, 128, 24, 0.4), 
+                 0 0 20px rgba(8, 128, 24, 0.4), 
+                 0 0 30px rgba(8, 128, 24, 0.4);
+}
+
+.standort {
+    border: 0;
+    width: 600px;
+    height: 400px;
+    position: relative;
+    left: 370px;
+    border-radius: 20px;
+    box-shadow: 0 10px 13px rgba(0, 0, 0, 0.1);
+}

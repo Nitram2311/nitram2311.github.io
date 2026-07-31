@@ -1,0 +1,120 @@
+* {
+  font-family: poppins, sans-serif;
+}
+
+body {
+    background: #1a1a2e;
+    background-attachment: fixed;
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(90deg, #1a1a2e, #414040); /* Döner-Farben */
+    color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Logo */
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Navigation */
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 18px;
+    transition: opacity 0.2s;
+}
+
+.nav a:hover {
+  opacity: 0.7;
+}
+
+/* Responsiv für Handy */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav a {
+    margin: 10px;
+    display: inline-block;
+  }
+} 
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgb(68, 68, 68);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    background: linear-gradient(180deg, #0066ff, #00b7ff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.contact-info {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #e8f5e9;
+    border-left: 5px solid #0066ff;
+    border-radius: 5px;
+}
+
+.contact-info a {
+    color: #0066ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    main {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    header {
+        padding: 40px 10px;
+    }
+}
+
+.message {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color: #ffffff;
+}
+
